@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const buildFirefox = require('../scripts/build-firefox');
 const root = path.join(__dirname, '..', 'extension');
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
 function exists(relative) {
@@ -22,4 +23,19 @@ test('all manifest and page resources exist in the installable extension directo
       if (!/^[a-z]+:/i.test(file)) exists(file);
     }
   }
+});
+
+test('Firefox package uses event-page scripts and declares Android compatibility', () => {
+  const firefoxRoot = buildFirefox();
+  const firefoxManifest = JSON.parse(fs.readFileSync(path.join(firefoxRoot, 'manifest.json'), 'utf8'));
+  assert.deepEqual(firefoxManifest.background.scripts, ['core.js', 'background.js']);
+  assert.equal(Object.hasOwn(firefoxManifest.background, 'service_worker'), false);
+  assert.equal(Object.hasOwn(firefoxManifest, 'minimum_chrome_version'), false);
+  assert.equal(firefoxManifest.browser_specific_settings.gecko.strict_min_version, '140.0');
+  assert.equal(firefoxManifest.browser_specific_settings.gecko_android.strict_min_version, '142.0');
+  assert.deepEqual(firefoxManifest.browser_specific_settings.gecko.data_collection_permissions.required, ['none']);
+  for (const file of firefoxManifest.background.scripts) {
+    assert.equal(fs.existsSync(path.join(firefoxRoot, file)), true, `Missing Firefox background script: ${file}`);
+  }
+  assert.equal(fs.readFileSync(path.join(firefoxRoot, 'popup.css'), 'utf8'), fs.readFileSync(path.join(root, 'popup.css'), 'utf8'));
 });

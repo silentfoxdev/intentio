@@ -7,10 +7,12 @@ Read the [privacy policy](PRIVACY.md) for details about local URL processing and
 ## Install for development
 
 - **Chrome 121+**: open `chrome://extensions`, enable Developer mode, and choose **Load unpacked**. Select the `extension/` directory.
-- **Firefox 140+**: open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `extension/manifest.json`.
+- **Firefox desktop 140+**: run `npm run build:firefox`, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `dist/firefox/manifest.json`.
+- **Firefox for Android 142+**: run `npm run build:firefox`, then use `web-ext run -t firefox-android --source-dir dist/firefox --adb-device DEVICE_ID --firefox-apk org.mozilla.firefox` with an Android device connected through ADB. The extension appears in Firefox's Add-ons menu; its popup opens over the current page.
 
-The extension has no runtime dependencies or build step. Run `npm run check` with Node.js 20+ to check syntax and run tests.
+The Chrome extension loads directly from `extension/`. Firefox uses the generated `dist/firefox/` package so its manifest contains only the background format Firefox supports. The extension has no runtime dependencies. Run `npm run check` with Node.js 20+ to check syntax and run tests.
 The icon design lives in `scripts/generate-icons.js`. Run `npm run icons` to regenerate its SVG and toolbar PNGs.
+On Android, check the add-on from Firefox's menu: add a rule in the popup, visit a matching site, open settings, then pause the rule and confirm the original page loads again.
 
 ## Rules
 
@@ -34,7 +36,7 @@ Existing `blockedPatterns` are migrated on first launch. Simple wildcards become
 - `extension/popup.*`, `extension/options.*`, and `extension/blocked.*` are the three interfaces. `extension/theme.css` and `extension/ui.js` share styling and helpers.
 - `tests/core.test.js` tests matching and migration.
 
-New navigations are blocked with `declarativeNetRequest`. Browser limits apply to dynamic and regular-expression rules; Intentio accepts up to 500 rules. Chrome uses a service worker and Firefox uses background scripts under Manifest V3. The PIN is a self-control barrier, not security against someone with access to browser settings or developer tools. New PINs use PBKDF2, and hashes from earlier releases remain verifiable.
+New navigations are blocked with `declarativeNetRequest`. Browser limits apply to dynamic and regular-expression rules; Intentio accepts up to 500 rules. Chrome uses a service worker and Firefox, including Android, uses background scripts under Manifest V3. Firefox desktop requires version 140+ and Firefox for Android requires version 142+ for the manifest's data collection declaration. The PIN is a self-control barrier, not security against someone with access to browser settings or developer tools. New PINs use PBKDF2, and hashes from earlier releases remain verifiable.
 
 ## Contributing
 
