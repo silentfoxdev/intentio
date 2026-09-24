@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Intentio",
+  "version": "2.0.0",
+  "description": "Block distractions and choose where to focus your attention.",
+  "author": "Intentio",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "intentio@silentfox.dev",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  },
+  "minimum_chrome_version": "121",
+  "permissions": ["storage", "tabs", "declarativeNetRequest", "alarms"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "scripts": ["core.js", "background.js"],
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Intentio",
+    "default_icon": { "48": "icons/icon48.png", "96": "icons/icon96.png" }
+  },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "web_accessible_resources": [{ "resources": ["blocked.html", "blocked.css", "blocked.js", "core.js", "icons/icon48.png", "icons/icon.svg"], "matches": ["http://*/*", "https://*/*"] }],
+  "icons": { "48": "icons/icon48.png", "96": "icons/icon96.png" }
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Settings · Intentio</title>
+  <link rel="stylesheet" href="theme.css"><link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <div><div class="brand"><img src="icons/icon.svg" alt=""><span>intentio</span></div><p class="muted">A more intentional way to browse.</p></div>
+      <label class="switch-row"><span id="enabledLabel">Active</span><span class="switch"><input id="enabled" type="checkbox"><span></span></span></label>
+    </header>
+    <main>
+      <section class="stats-grid" aria-label="Statistics">
+        <div class="stat"><span class="eyebrow">RULES</span><strong id="ruleCount">0</strong></div>
+        <div class="stat"><span class="eyebrow">BLOCKS TODAY</span><strong id="todayCount">0</strong></div>
+        <div class="stat"><span class="eyebrow">TOTAL BLOCKS</span><strong id="totalCount">0</strong></div>
+      </section>
+      <section class="card">
+        <div class="section-title"><div><span class="eyebrow">01 / SET UP</span><h1>Add a rule</h1></div></div>
+        <p class="muted">Matching ignores the protocol and “www”. For domains, “Starts with” includes all pages on the site.</p>
+        <form id="addForm" class="add-grid">
+          <div><label for="ruleValue">Domain, URL, or text</label><input id="ruleValue" type="text" placeholder="e.g. youtube.com/shorts" spellcheck="false" autocomplete="off" required></div>
+          <div><label for="ruleMode">Match type</label><select id="ruleMode"><option value="starts">Starts with</option><option value="contains">Contains</option><option value="ends">Ends with</option><option value="exact">Exact match</option></select></div>
+          <button class="button primary" type="submit">Add</button>
+        </form>
+        <p id="addFeedback" class="feedback" role="status" hidden></p>
+      </section>
+      <section class="card">
+        <div class="section-title"><div><span class="eyebrow">02 / MANAGE</span><h2>Your rules</h2></div><div class="actions"><button id="export" class="button subtle small">Export</button><button id="import" class="button subtle small">Import</button><input id="importFile" type="file" accept=".json,application/json" hidden></div></div>
+        <label class="sr-only" for="search">Search rules</label><input id="search" type="search" placeholder="Search rules…">
+        <ul id="rules" class="rule-list"></ul>
+        <p id="empty" class="empty">No rules yet. Add one above.</p>
+        <p id="listFeedback" class="feedback" role="status" hidden></p>
+      </section>
+      <section class="card">
+        <div class="section-title"><div><span class="eyebrow">03 / PREFERENCES</span><h2>Behavior</h2></div></div>
+        <div class="setting"><div><strong>Redirect to a chosen page</strong><p class="muted">Open an alternative address when a rule blocks a page.</p></div><label class="switch"><input id="redirectEnabled" type="checkbox" aria-label="Enable redirect"><span></span></label></div>
+        <div id="redirectRow" class="inline-form" hidden><label class="sr-only" for="redirectTarget">Redirect URL</label><input id="redirectTarget" type="url" placeholder="https://example.com"><button id="saveRedirect" class="button secondary">Save URL</button></div>
+        <div class="setting"><div><strong>Hide “Unblock for 10 minutes”</strong><p class="muted">The block page will not show the temporary unblock button.</p></div><label class="switch"><input id="hideUnblock" type="checkbox" aria-label="Hide the Unblock for 10 minutes button"><span></span></label></div>
+        <div class="setting"><div><strong>Protect changes with a PIN</strong><p class="muted">Require the PIN to pause Intentio, remove rules, and change preferences.</p></div><label class="switch"><input id="lockEnabled" type="checkbox" aria-label="Enable PIN protection"><span></span></label></div>
+        <div id="pinSetup" class="inline-form" hidden><input id="newPin" type="password" inputmode="numeric" maxlength="8" placeholder="PIN: 4–8 digits"><input id="confirmPin" type="password" inputmode="numeric" maxlength="8" placeholder="Repeat PIN"><button id="savePin" class="button secondary">Enable PIN</button></div>
+        <button id="changePin" class="button subtle small" hidden>Change PIN</button>
+        <p id="settingsFeedback" class="feedback" role="status" hidden></p>
+      </section>
+      <div class="footer">
+        <button id="resetStats" class="button subtle small">Reset statistics</button>
+        <nav class="external-links" aria-label="Project links">
+          <a href="https://github.com/silentfoxdev/intentio" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://github.com/silentfoxdev/intentio/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+          <a href="https://ko-fi.com/silentfoxdev/donate" target="_blank" rel="noopener noreferrer">☕ Support</a>
+        </nav>
+      </div>
+    </main>
+  </div>
+  <script src="core.js"></script><script src="ui.js"></script><script src="options.js"></script>
+</body>
+</html>

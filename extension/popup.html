@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Intentio</title>
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <header class="brand-row">
+      <div class="brand"><img src="icons/icon.svg" alt=""><span>intentio</span></div>
+      <label class="switch" aria-label="Enable Intentio"><input id="enabled" type="checkbox"><span></span></label>
+    </header>
+    <section class="status-card">
+      <div class="eyebrow">STATUS</div>
+      <strong id="status">Loading…</strong>
+      <span id="ruleCount" class="muted"></span>
+    </section>
+    <form id="addForm" class="card">
+      <h1>Block an address</h1>
+      <p class="muted">Enter a domain, URL, or part of one.</p>
+      <label for="ruleValue">Address or text</label>
+      <input id="ruleValue" type="text" spellcheck="false" autocomplete="off" placeholder="e.g. youtube.com/shorts" required>
+      <label for="ruleMode">Match type</label>
+      <select id="ruleMode">
+        <option value="starts">Starts with</option>
+        <option value="contains">Contains</option>
+        <option value="ends">Ends with</option>
+        <option value="exact">Exact match</option>
+      </select>
+      <p id="ruleHint" class="hint">Block this address and its pages.</p>
+      <button class="button primary full" type="submit">Add rule</button>
+      <p id="feedback" class="feedback" role="status" hidden></p>
+    </form>
+    <section id="pausedSection" class="card" hidden>
+      <h2>Paused</h2>
+      <ul id="pausedList" class="plain-list"></ul>
+    </section>
+    <button id="settings" class="button subtle full">Open settings <span aria-hidden="true">↗</span></button>
+  </main>
+  <script src="core.js"></script><script src="ui.js"></script><script src="popup.js"></script>
+</body>
+</html>

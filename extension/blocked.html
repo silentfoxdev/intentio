@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page blocked · Intentio</title><link rel="stylesheet" href="theme.css"><link rel="stylesheet" href="blocked.css"></head>
+<body>
+  <main class="blocked-card">
+    <div class="brand"><img src="icons/icon.svg" alt=""><span>intentio</span></div>
+    <h1>This page is blocked.</h1>
+    <p class="muted">You chose to focus your attention elsewhere.</p>
+    <div class="details"><div><span>ADDRESS</span><strong id="blockedUrl">—</strong></div><div><span>RULE</span><strong id="matchedRule">—</strong></div></div>
+    <div class="actions"><button id="back" class="button secondary">Go back</button><button id="settings" class="button subtle">Settings</button></div>
+    <button id="unblock" class="button link">Unblock for 10 minutes</button>
+    <p id="feedback" class="feedback" role="status" hidden></p>
+    <nav class="external-links" aria-label="Project links">
+      <a href="https://github.com/silentfoxdev/intentio" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://github.com/silentfoxdev/intentio/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+      <a href="https://ko-fi.com/silentfoxdev/donate" target="_blank" rel="noopener noreferrer">☕ Support</a>
+    </nav>
+  </main>
+  <script src="core.js"></script><script src="ui.js"></script><script src="blocked.js"></script>
+</body>
+</html>
