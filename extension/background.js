@@ -3,7 +3,7 @@ if (typeof IntentioCore === "undefined") importScripts("core.js");
 const api = globalThis.browser || globalThis.chrome;
 const BLOCKED = api.runtime.getURL("blocked.html");
 const PAUSE_ALARM = "pause-expiry";
-const defaults = { rules: [], isEnabled: true, pausedRules: {}, blockStats: {}, dailyStats: { date: "", count: 0 }, redirectEnabled: false, redirectTarget: "", hideUnblockButton: false, lockEnabled: false, lockPin: "" };
+const defaults = { rules: [], isEnabled: true, pausedRules: {}, blockStats: {}, dailyStats: { date: "", count: 0 }, redirectEnabled: false, redirectTarget: "", hideUnblockButton: false, hideGeminiResults: false, lockEnabled: false, lockPin: "" };
 let updateQueue = Promise.resolve();
 let refreshPending = false;
 

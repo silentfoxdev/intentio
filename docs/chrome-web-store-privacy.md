@@ -6,7 +6,7 @@ These answers describe the current `extension/` source. Review them against the 
 
 | Field | Suggested answer |
 | --- | --- |
-| Single purpose | **Block websites chosen by the user with locally stored rules, and update open tabs when those rules change.** |
+| Single purpose | **Help users focus while browsing by blocking chosen websites and optionally hiding Google Search AI Overview panels.** |
 | Remote code | **No, I am not using remote code.** All executed JavaScript is packaged with the extension. |
 | Privacy policy URL | `https://github.com/fabiomolignoni/intentio/blob/main/PRIVACY.md` once the repository and file are public. Open it in a signed-out browser before submitting. |
 
@@ -18,7 +18,7 @@ These answers describe the current `extension/` source. Review them against the 
 | `tabs` | Reads tab addresses to apply new or changed rules to already-open tabs, restore tabs when a rule is paused or removed, and prefill a rule from the active tab. |
 | `declarativeNetRequest` | Installs browser-managed rules that redirect matching top-level navigations to Intentio's packaged block page before the site loads. |
 | `alarms` | Ends temporary rule pauses at the time selected by the user. |
-| `http://*/*` and `https://*/*` host permissions | Allows user-created rules to cover any HTTP or HTTPS website the user chooses. Intentio needs this scope to redirect matching pages to its local block page; it does not read page bodies. |
+| `http://*/*` and `https://*/*` host permissions | Allows user-created rules to cover any HTTP or HTTPS website the user chooses. Intentio needs this scope to redirect matching pages to its local block page. Its optional Google Search feature checks result headings locally to identify AI panels. |
 
 ### Data usage disclosure
 
@@ -26,11 +26,11 @@ Select **Web history** (or **Web browsing activity** if that is the current labe
 
 Select **User activity** if the dashboard offers it: Intentio stores counts of blocked navigation events by rule and for the current or last recorded day. Select **Authentication information** if offered: the optional local PIN lock stores a salted PIN hash (or a legacy hash), even though the extension has no account sign-in. If the form separately offers **user-provided content**, disclose user-entered rule text and the optional redirect address there. These categories are conservative descriptions of data handled locally; the exact dashboard labels may differ.
 
-The current extension does not read website content, form data, cookies, personal communications, payment information, or health information. Broad host permissions alone do not mean those data are read. Review the complete form before certifying, especially after any feature or manifest change.
+When the optional Google AI Overview control is enabled, the extension checks result heading labels on Google Search pages locally. It does not store or send those labels, or read form data, cookies, personal communications, payment information, or health information. Review the complete form before certifying, especially after any feature or manifest change.
 
 Suggested explanation, if a free-text data-use field appears:
 
-> Intentio locally compares tab URLs with user-created blocking rules, keeps rules and block counts in browser local extension storage, and optionally stores a hashed PIN and a user-chosen redirect URL. It has no developer server, analytics, or advertising. An optional redirect navigates the browser to a website chosen by the user.
+> Intentio locally compares tab URLs with user-created blocking rules, keeps rules and block counts in browser local extension storage, and optionally stores a hashed PIN and a user-chosen redirect URL. An optional Google Search control hides AI Overview panels and checks heading labels locally without storing or sending them. It has no developer server, analytics, or advertising. An optional redirect navigates the browser to a website chosen by the user.
 
 The current implementation supports the Limited Use certifications: data is used for the disclosed blocking purpose, is not sold or transferred for advertising or credit decisions, and is not sent to the developer. The public policy contains an affirmative Limited Use statement. The Chrome Web Store listing should prominently describe that page addresses are checked to block sites and that custom redirect navigates to a user-chosen site when enabled.
 

@@ -1,0 +1,11 @@
+/* Keep the answer module hidden as Google fills it asynchronously. */
+html[data-intentio-hide-gemini="true"] #m-x-content,
+html[data-intentio-hide-gemini="true"] [data-intentio-gemini-panel="true"],
+html[data-intentio-hide-gemini="true"] #rcnt [data-attrid="ai_overview"],
+html[data-intentio-hide-gemini="true"] #rcnt [data-attrid="AIOverview"],
+html[data-intentio-hide-gemini="true"] #rcnt [data-async-type="folsrch"],
+html[data-intentio-hide-gemini="true"] #kp-wp-tab-overview > div:first-child:has(a[href^="https://support.google.com/websearch?p=ai_overviews"]),
+html[data-intentio-hide-gemini="true"] h1 + div[data-async-context] > div:first-child:not(:only-child):has([data-async-type="folsrch"]),
+html[data-intentio-hide-gemini="true"] h1 + div[data-async-context] > div:first-child:not(:only-child):has(a[href^="https://support.google.com/websearch?p=ai_overviews"]) {
+  display: none !important;
+}

@@ -1,8 +1,8 @@
 {
   "name": "intentio",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "description": "Cross-browser focus extension",
-  "scripts": { "icons": "node scripts/generate-icons.js", "build:firefox": "node scripts/build-firefox.js", "test": "node --test tests/*.test.js", "check": "node --check extension/core.js && node --check extension/background.js && node --check extension/popup.js && node --check extension/options.js && node --check extension/blocked.js && node --check extension/ui.js && node --check scripts/build-firefox.js && npm test" },
+  "scripts": { "icons": "node scripts/generate-icons.js", "build": "node scripts/build.js", "build:chrome": "node scripts/build-chrome.js", "build:firefox": "node scripts/build-firefox.js", "test": "node --test tests/*.test.js", "check": "node --check extension/core.js && node --check extension/background.js && node --check extension/popup.js && node --check extension/options.js && node --check extension/blocked.js && node --check extension/ui.js && node --check extension/google-search.js && node --check scripts/build.js && node --check scripts/build-chrome.js && node --check scripts/build-firefox.js && npm test" },
   "engines": { "node": ">=20" }
 }

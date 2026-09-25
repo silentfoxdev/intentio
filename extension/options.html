@@ -11,14 +11,20 @@
       <div><div class="brand"><img src="icons/icon.svg" alt=""><span>intentio</span></div><p class="muted">A more intentional way to browse.</p></div>
       <label class="switch-row"><span id="enabledLabel">Active</span><span class="switch"><input id="enabled" type="checkbox"><span></span></span></label>
     </header>
+    <nav class="tabs" role="tablist" aria-label="Settings sections">
+      <button id="tab-rules" class="tab" type="button" role="tab" aria-controls="panel-rules" aria-selected="true" tabindex="0">Blocking rules</button>
+      <button id="tab-wellbeing" class="tab" type="button" role="tab" aria-controls="panel-wellbeing" aria-selected="false" tabindex="-1">Digital wellbeing</button>
+      <button id="tab-options" class="tab" type="button" role="tab" aria-controls="panel-options" aria-selected="false" tabindex="-1">Options</button>
+    </nav>
     <main>
+      <div id="panel-rules" role="tabpanel" aria-labelledby="tab-rules" tabindex="0">
       <section class="stats-grid" aria-label="Statistics">
         <div class="stat"><span class="eyebrow">RULES</span><strong id="ruleCount">0</strong></div>
         <div class="stat"><span class="eyebrow">BLOCKS TODAY</span><strong id="todayCount">0</strong></div>
         <div class="stat"><span class="eyebrow">TOTAL BLOCKS</span><strong id="totalCount">0</strong></div>
       </section>
       <section class="card">
-        <div class="section-title"><div><span class="eyebrow">01 / SET UP</span><h1>Add a rule</h1></div></div>
+        <div class="section-title"><div><span class="eyebrow">SET UP</span><h1>Add a rule</h1></div></div>
         <p class="muted">Matching ignores the protocol and “www”. For domains, “Starts with” includes all pages on the site.</p>
         <form id="addForm" class="add-grid">
           <div><label for="ruleValue">Domain, URL, or text</label><input id="ruleValue" type="text" placeholder="e.g. youtube.com/shorts" spellcheck="false" autocomplete="off" required></div>
@@ -28,14 +34,23 @@
         <p id="addFeedback" class="feedback" role="status" hidden></p>
       </section>
       <section class="card">
-        <div class="section-title"><div><span class="eyebrow">02 / MANAGE</span><h2>Your rules</h2></div><div class="actions"><button id="export" class="button subtle small">Export</button><button id="import" class="button subtle small">Import</button><input id="importFile" type="file" accept=".json,application/json" hidden></div></div>
+        <div class="section-title"><div><span class="eyebrow">MANAGE</span><h2>Your rules</h2></div><div class="actions"><button id="export" class="button subtle small">Export</button><button id="import" class="button subtle small">Import</button><input id="importFile" type="file" accept=".json,application/json" hidden></div></div>
         <label class="sr-only" for="search">Search rules</label><input id="search" type="search" placeholder="Search rules…">
         <ul id="rules" class="rule-list"></ul>
         <p id="empty" class="empty">No rules yet. Add one above.</p>
         <p id="listFeedback" class="feedback" role="status" hidden></p>
       </section>
+      </div>
+      <div id="panel-wellbeing" role="tabpanel" aria-labelledby="tab-wellbeing" tabindex="0" hidden>
+        <section class="card">
+          <div class="section-title"><div><span class="eyebrow">DIGITAL WELLBEING</span><h1>Reduce distractions</h1></div></div>
+          <div class="setting"><div><strong>Hide Gemini answers in Google Search</strong><p class="muted">Hide the AI Overview panel and its generated answer from Google search results.</p></div><label class="switch"><input id="hideGemini" type="checkbox" aria-label="Hide Gemini answers in Google Search"><span></span></label></div>
+          <p id="wellbeingFeedback" class="feedback" role="status" hidden></p>
+        </section>
+      </div>
+      <div id="panel-options" role="tabpanel" aria-labelledby="tab-options" tabindex="0" hidden>
       <section class="card">
-        <div class="section-title"><div><span class="eyebrow">03 / PREFERENCES</span><h2>Behavior</h2></div></div>
+        <div class="section-title"><div><span class="eyebrow">OPTIONS</span><h1>Behavior</h1></div></div>
         <div class="setting"><div><strong>Redirect to a chosen page</strong><p class="muted">Open an alternative address when a rule blocks a page.</p></div><label class="switch"><input id="redirectEnabled" type="checkbox" aria-label="Enable redirect"><span></span></label></div>
         <div id="redirectRow" class="inline-form" hidden><label class="sr-only" for="redirectTarget">Redirect URL</label><input id="redirectTarget" type="url" placeholder="https://example.com"><button id="saveRedirect" class="button secondary">Save URL</button></div>
         <div class="setting"><div><strong>Hide “Unblock for 10 minutes”</strong><p class="muted">The block page will not show the temporary unblock button.</p></div><label class="switch"><input id="hideUnblock" type="checkbox" aria-label="Hide the Unblock for 10 minutes button"><span></span></label></div>
@@ -44,14 +59,15 @@
         <button id="changePin" class="button subtle small" hidden>Change PIN</button>
         <p id="settingsFeedback" class="feedback" role="status" hidden></p>
       </section>
-      <div class="footer">
-        <button id="resetStats" class="button subtle small">Reset statistics</button>
+      <div class="options-actions"><button id="resetStats" class="button subtle small">Reset statistics</button></div>
+      </div>
+      <footer class="footer">
         <nav class="external-links" aria-label="Project links">
           <a href="https://github.com/silentfoxdev/intentio" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="https://github.com/silentfoxdev/intentio/issues" target="_blank" rel="noopener noreferrer">Issues</a>
           <a href="https://ko-fi.com/silentfoxdev/donate" target="_blank" rel="noopener noreferrer">☕ Support</a>
         </nav>
-      </div>
+      </footer>
     </main>
   </div>
   <script src="core.js"></script><script src="ui.js"></script><script src="options.js"></script>

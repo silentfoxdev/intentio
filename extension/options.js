@@ -1,6 +1,26 @@
 "use strict";
 let state;
 const modeLabels = IntentioCore.MODES;
+const tabs = [...document.querySelectorAll('[role="tab"]')];
+function selectTab(selected, moveFocus = false) {
+  for (const tab of tabs) {
+    const active = tab === selected;
+    tab.setAttribute("aria-selected", String(active));
+    tab.tabIndex = active ? 0 : -1;
+    $(tab.getAttribute("aria-controls")).hidden = !active;
+  }
+  if (moveFocus) selected.focus();
+}
+for (const tab of tabs) {
+  tab.addEventListener("click", () => selectTab(tab));
+  tab.addEventListener("keydown", event => {
+    const offset = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+    const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : offset ? (tabs.indexOf(tab) + offset + tabs.length) % tabs.length : -1;
+    if (next < 0) return;
+    event.preventDefault();
+    selectTab(tabs[next], true);
+  });
+}
 function render() {
   if (!state) return;
   $("enabled").checked = state.isEnabled;
@@ -12,6 +32,7 @@ function render() {
   $("redirectRow").hidden = !state.redirectEnabled;
   $("redirectTarget").value = state.redirectTarget || "";
   $("hideUnblock").checked = state.hideUnblockButton;
+  $("hideGemini").checked = state.hideGeminiResults;
   $("lockEnabled").checked = state.lockEnabled;
   $("changePin").hidden = !state.lockEnabled;
   const filter = $("search").value.toLowerCase();
@@ -86,10 +107,16 @@ $("saveRedirect").addEventListener("click", async () => {
     showMessage($("settingsFeedback"), "URL saved.");
   } catch (error) { showMessage($("settingsFeedback"), error.message, true); }
 });
-$("hideUnblock").addEventListener("change", async event => {
-  if (!(await requirePin("Enter your PIN to change this setting"))) { render(); return; }
-  await api.storage.local.set({ hideUnblockButton: event.target.checked });
-});
+async function setPreference(key, value, feedback) {
+  try {
+    if (!(await requirePin("Enter your PIN to change this setting"))) { render(); return; }
+    await api.storage.local.set({ [key]: value });
+    await refresh();
+    showMessage($(feedback), "Changes saved.");
+  } catch (error) { render(); showMessage($(feedback), error.message, true); }
+}
+$("hideUnblock").addEventListener("change", event => setPreference("hideUnblockButton", event.target.checked, "settingsFeedback"));
+$("hideGemini").addEventListener("change", event => setPreference("hideGeminiResults", event.target.checked, "wellbeingFeedback"));
 $("lockEnabled").addEventListener("change", async event => {
   if (event.target.checked) { $("pinSetup").hidden = false; event.target.checked = false; $("newPin").focus(); return; }
   if (!(await requirePin("Enter your PIN to remove the lock"))) { render(); return; }

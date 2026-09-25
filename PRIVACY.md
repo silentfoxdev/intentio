@@ -1,18 +1,18 @@
 # Intentio Privacy Policy
 
-Last updated: September 24, 2026
+Last updated: September 25, 2026
 
 Intentio is a browser extension that blocks websites according to rules you choose. It works locally in Chrome and Firefox. There is no Intentio account, developer-operated server, advertising, analytics, or telemetry in the extension.
 
 ## Information Intentio uses
 
-To decide whether to block a page, Intentio reads the addresses of open tabs and new page navigations and compares them with your rules. An address can include a domain, path, and query string. Intentio also reads the address of the active tab to help you add a rule from the popup. It does not read page text, form entries, cookies, or the contents of network requests and responses. It does not access your browser's history database.
+To decide whether to block a page, Intentio reads the addresses of open tabs and new page navigations and compares them with your rules. An address can include a domain, path, and query string. Intentio also reads the address of the active tab to help you add a rule from the popup. If you enable the Google AI Overview toggle, it checks heading labels on Google search result pages locally to identify the AI panel. It does not read form entries, cookies, or the contents of network requests and responses. It does not access your browser's history database.
 
 Intentio stores the following in the browser's **local extension storage** on your device:
 
 - Rules you add or import, which may contain domains or full addresses; whether blocking is enabled; and the end times of temporary rule pauses.
 - The number of blocks for each rule and a count for the current or most recently recorded day. It does not keep a separate list of every page you visited or blocked.
-- Your preferences, including an optional redirect address and whether the unblock button is shown.
+- Your preferences, including an optional redirect address, whether the unblock button is shown, and whether Google AI Overview results are hidden.
 - If you enable the optional PIN lock, a salted hash of the PIN (or a legacy hash from an earlier version), not the PIN itself. This lock is a self-control feature, not protection against someone who can access your browser profile or extension settings.
 
 When a page is blocked, Intentio places the original address in the fragment of its local block-page URL so it can show that address and restore the tab when a rule is paused or removed. The address is visible in that tab and may remain in your browser's own history until you clear it there.
@@ -20,6 +20,8 @@ When a page is blocked, Intentio places the original address in the fragment of 
 ## How information is used and shared
 
 Intentio uses these addresses, rules, settings, and counts only to block or restore pages, show the block page, manage temporary pauses, and display your statistics. The extension does not send them to the developer, sell them, use them for advertising or profiling, or share them with analytics services. It does not load or execute remote code.
+
+When you enable the Google Search toggle, a content script uses the saved preference to hide matching AI Overview elements on Google search pages. To identify AI Overview panels, it compares result headings locally; it does not store or send their text. The toggle is off by default.
 
 If you enable **custom redirect**, your browser navigates to the address you entered when a rule blocks a page. That website receives a normal browser request and handles it under its own privacy policy. Intentio does not intentionally add the blocked page's address to that request; information you put into the redirect address itself will be sent as part of the navigation. Custom redirect is off by default.
 

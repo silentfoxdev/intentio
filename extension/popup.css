@@ -1,7 +1,8 @@
-body { width: min(380px, 100vw); min-height: 420px; }
+body { width: 460px; min-height: 420px; }
+@media (hover: none) and (max-width: 460px) { body { width: 100%; } }
 .popup { padding: 20px; display: grid; gap: 16px; }
 .brand-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-.status-card { display: grid; gap: 3px; padding: 18px 20px; background: linear-gradient(135deg,#102033,#0c151f); border: 1px solid #23415c; border-radius: 16px; }
+.status-card { display: grid; gap: 3px; padding: 18px 20px; background: var(--surface-2); border: 1px solid #23415c; border-radius: 16px; }
 .status-card strong { font-size: 19px; color: #f2f8ff; }
 .card { padding: 20px; }
 .card h1 { font-size: 19px; margin: 0 0 4px; }
